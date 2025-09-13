@@ -5,7 +5,7 @@ import { getRandomId, MIN_LOCATION_ID, MAX_LOCATION_ID } from './utils/getRandom
 import LocationInfo from './components/LocationInfo';
 import ResidentCard from './components/ResidentCard';
 import Pagination from './components/Pagination';
-import SearchBar from './components/SearchBar';
+import RickAndMorty from './assets/RICK-AND-MORTY.webp'
 
 const API = 'https://rickandmortyapi.com/api/location/';
 const PAGE_SIZE = 8;
@@ -56,10 +56,10 @@ export default function App() {
   return (
     <div className="container">
       <header className="header">
+        <img src={RickAndMorty} alt='Rick and Morty' className='img-header'/>
         <h1 className="title">Rick & Morty — Locaciones</h1>
         <button onClick={handleRandom} aria-label="Locación aleatoria">🎲 Aleatoria</button>
       </header>
-
       <form className="form" onSubmit={onSubmit} style={{ marginBottom: 8 }}>
         <input
           type="number"
@@ -69,6 +69,7 @@ export default function App() {
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
           aria-invalid={Boolean(formError)}
+
         />
         <button type="submit">Buscar por ID</button>
       </form>
@@ -86,7 +87,6 @@ export default function App() {
             <div className="card">Esta locación no tiene residentes.</div>
           ) : (
             <>
-              <Pagination page={page} totalPages={totalPages} onPageChange={(p) => setPage(Math.min(Math.max(1, p), totalPages))} />
 
               <div className="grid">
                 {(paginatedResidents.length > 0 ? paginatedResidents : residents).map((url) => (
